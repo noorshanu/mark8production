@@ -10,17 +10,21 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Content */}
-          <div className="space-y-8">
+          <div className="">
             {/* Main Tagline */}
+            <h2 className="text-sm font-medium text-black bg-yellow-500 px-4 py-2  font-tiktok-sans rounded-full w-fit">
+              Hum sirf post nahi karte
+           
+            </h2>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
             >
-              <h1 className="text-5xl  sm:text-7xl font-bold leading-tight">
-                <span className="text-yellow-500">Dikhoge</span>  <span className="text-black">Tabhi to</span>
+              <h1 className="text-5xl  sm:text-7xl font-bold leading-tight font-bangers">
+                <span className="text-yellow-500">BRAND </span>  <span className="text-black">BANATE </span>
                 <br />
-                <span className="text-yellow-500">Bikoge</span>
+                <span className="text-yellow-500">HAIN.</span>
               </h1>
             </motion.div>
 
@@ -29,10 +33,12 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-              className="text-xl md:text-2xl text-gray-700 leading-relaxed"
+              className="text-base md:text-xl text-gray-700 "
             >
-              Show your products, showcase your brand, and watch your business grow. 
-              <span className="text-yellow-500 font-semibold"> Visual storytelling</span> that converts.
+              स्वागत है आपका North East की सबसे Creative Marketing Agency में
+जहाँ ideas boring नहीं होते
+
+              <span className="text-yellow-500 font-semibold"> और results sirf promise नहीं… </span> <br /> Deliver होते हैं
             </motion.p>
 
             {/* CTA Buttons */}
@@ -40,7 +46,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 mt-4"
             >
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(234, 179, 8, 0.3)' }}
