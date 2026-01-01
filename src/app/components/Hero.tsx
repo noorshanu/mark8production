@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import React from 'react'
@@ -170,26 +171,16 @@ const Hero = () => {
                     
                     {/* Decorative Elements */}
                     <div className="absolute top-10 left-10 w-20 h-20 bg-yellow-500 rounded-full opacity-20 blur-xl" />
-                    <div className="absolute bottom-20 right-20 w-32 h-32 bg-orange-500 rounded-full opacity-20 blur-xl" />
+                    <div className="absolute bottom-20 right-20 w-32 h-32 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-20 blur-xl" />
                     
                     {/* Center Content */}
                     <div className="absolute inset-0 flex items-center justify-center z-20">
                       <motion.div
-                        animate={{
-                          scale: [1, 1.1, 1],
-                          rotate: [0, 5, -5, 0],
-                        }}
-                        transition={{
-                          duration: 6,
-                          repeat: Infinity,
-                          ease: 'easeInOut',
-                        }}
+                 
                         className="text-center"
                       >
-                        <div className="w-48 h-48 mx-auto bg-gradient-to-br from-yellow-400 to-orange-500 rounded-3xl shadow-2xl flex items-center justify-center">
-                          <div className="text-6xl font-bold text-white">📱</div>
-                        </div>
-                        <p className="mt-6 text-xl font-semibold text-gray-800">
+                     <img src="/hero.png" alt="Showcase Your Brand" className=" mx-auto  rounded-3xl h-[400px]"  />
+                        <p className="mt-3 text-xl font-semibold text-gray-800 bg-yellow-500 px-4 py-2 rounded-full w-fit mx-auto">
                           Showcase Your Brand
                         </p>
                       </motion.div>
