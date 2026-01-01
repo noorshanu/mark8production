@@ -1,12 +1,13 @@
-'use client'
-import { motion } from 'framer-motion'
+/* eslint-disable @next/next/no-img-element */
+"use client";
+import { motion } from "framer-motion";
 
 const IntroSection = () => {
   const problems = [
-    { text: 'Reach kam hai', emoji: '📉' },
-    { text: 'Followers sirf number lag rahe hain', emoji: '👻' },
-    { text: 'Content hai, par wow factor missing hai', emoji: '😴' },
-  ]
+    { text: "Reach kam hai", img: "/reach.png" },
+    { text: "Followers sirf number lag rahe hain", img: "/follow.png" },
+    { text: "Content hai, par wow factor missing hai", img: "/content.png" },
+  ];
 
   return (
     <section className="relative bg-[#fdd820] py-20 overflow-hidden">
@@ -20,7 +21,8 @@ const IntroSection = () => {
           className="text-center mb-4"
         >
           <h2 className="text-4xl md:text-6xl font-bold text-black mb-2 leading-tight font-bangers">
-            Sach batao... <motion.span
+            Sach batao...{" "}
+            <motion.span
               animate={{ rotate: [0, 10, -10, 0] }}
               transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 2 }}
               className="inline-block"
@@ -65,25 +67,18 @@ const IntroSection = () => {
                   transition={{
                     duration: 3,
                     repeat: Infinity,
-                    ease: 'easeInOut',
+                    ease: "easeInOut",
                   }}
                   className="absolute inset-0 bg-yellow-500 rounded-full blur-3xl"
                 />
-                
+
                 <div className="relative z-10 flex items-center gap-4">
-                  <motion.div
-                    animate={{
-                      rotate: [0, 360],
-                      scale: [1, 1.2, 1],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
-                    className="text-5xl"
-                  >
-                    {problem.emoji}
+                  <motion.div className="text-5xl">
+                    <img
+                      src={problem.img}
+                      alt={problem.text}
+                      className="w-full h-full"
+                    />
                   </motion.div>
                   <div className="flex-1">
                     <div className="text-2xl mb-2">❌</div>
@@ -111,11 +106,11 @@ const IntroSection = () => {
               transition={{
                 duration: 2,
                 repeat: Infinity,
-                ease: 'easeInOut',
+                ease: "easeInOut",
               }}
               className="text-2xl md:text-3xl font-bold flex items-center gap-3"
             >
-              Relax. Aap sahi jagah aa gaye ho.{' '}
+              Relax. Aap sahi jagah aa gaye ho.{" "}
               <motion.span
                 animate={{ rotate: [0, 20, -20, 0] }}
                 transition={{ duration: 1, repeat: Infinity }}
@@ -143,7 +138,7 @@ const IntroSection = () => {
             transition={{
               duration: 10,
               repeat: Infinity,
-              ease: 'linear',
+              ease: "linear",
             }}
             className="absolute top-0 right-0 w-64 h-64 bg-yellow-500 rounded-full blur-3xl opacity-20"
           />
@@ -155,7 +150,7 @@ const IntroSection = () => {
             transition={{
               duration: 12,
               repeat: Infinity,
-              ease: 'linear',
+              ease: "linear",
             }}
             className="absolute bottom-0 left-0 w-72 h-72 bg-orange-500 rounded-full blur-3xl opacity-20"
           />
@@ -169,7 +164,7 @@ const IntroSection = () => {
                 transition={{
                   duration: 3,
                   repeat: Infinity,
-                  ease: 'linear',
+                  ease: "linear",
                 }}
                 className="text-6xl"
               >
@@ -182,22 +177,22 @@ const IntroSection = () => {
                 transition={{
                   duration: 1.5,
                   repeat: Infinity,
-                  ease: 'easeInOut',
+                  ease: "easeInOut",
                 }}
                 className="text-6xl"
               >
                 💰
               </motion.span>
             </div>
-            
+
             <h3 className="text-3xl md:text-5xl font-bold text-white text-center mb-4 leading-tight">
               Humari experienced & thodi crazy creative team
             </h3>
             <p className="text-xl md:text-2xl text-yellow-500 font-bold text-center">
-              aapke business ko banati hai{' '}
+              aapke business ko banati hai{" "}
               <motion.span
                 animate={{
-                  color: ['#fdd820', '#ff6b6b', '#4ecdc4', '#fdd820'],
+                  color: ["#fdd820", "#ff6b6b", "#4ecdc4", "#fdd820"],
                 }}
                 transition={{
                   duration: 2,
@@ -207,10 +202,10 @@ const IntroSection = () => {
               >
                 scroll-stopping
               </motion.span>
-              ,{' '}
+              ,{" "}
               <motion.span
                 animate={{
-                  color: ['#fdd820', '#ff6b6b', '#4ecdc4', '#fdd820'],
+                  color: ["#fdd820", "#ff6b6b", "#4ecdc4", "#fdd820"],
                 }}
                 transition={{
                   duration: 2,
@@ -220,11 +215,11 @@ const IntroSection = () => {
                 className="inline-block"
               >
                 eye-catching
-              </motion.span>
-              {' '}aur{' '}
+              </motion.span>{" "}
+              aur{" "}
               <motion.span
                 animate={{
-                  color: ['#fdd820', '#ff6b6b', '#4ecdc4', '#fdd820'],
+                  color: ["#fdd820", "#ff6b6b", "#4ecdc4", "#fdd820"],
                 }}
                 transition={{
                   duration: 2,
@@ -238,11 +233,9 @@ const IntroSection = () => {
             </p>
           </div>
         </motion.div>
-
-  
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default IntroSection
+export default IntroSection;
