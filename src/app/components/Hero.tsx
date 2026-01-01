@@ -33,12 +33,10 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-              className="text-base md:text-xl text-gray-700 "
+              className="text-sm md:text-base text-gray-700 "
             >
-              स्वागत है आपका North East की सबसे Creative Marketing Agency में
-जहाँ ideas boring नहीं होते
-
-              <span className="text-yellow-500 font-semibold"> और results sirf promise नहीं… </span> <br /> Deliver होते हैं
+            Swagat hai aapka North East ki sabse creative marketing agency mein
+            jahan ideas kabhi boring nahi hote <span className="text-yellow-500 font-semibold">aur results sirf promises nahi… </span> <br /> properly deliver hote hain.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -51,7 +49,7 @@ const Hero = () => {
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(234, 179, 8, 0.3)' }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-yellow-500 text-black font-bold text-lg rounded-lg flex items-center justify-center gap-2 hover:bg-yellow-600 transition-colors"
+                className="px-8 py-2 bg-yellow-500 text-black font-bold text-lg rounded-lg flex items-center justify-center gap-2 hover:bg-yellow-600 transition-colors"
               >
                Let&apos;s Talk
                 <FiArrowRight className="w-5 h-5" />

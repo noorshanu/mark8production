@@ -98,10 +98,11 @@ const Services = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
-            Our <span className="text-yellow-500">Services</span>
+          What We  <span className="text-yellow-500">Actually Do ?</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Comprehensive digital solutions to elevate your brand and drive growth
+          Hum sirf camera nahi chalate,
+          story chalate hain.
           </p>
           <div className="w-24 h-1 bg-yellow-500 mx-auto mt-6 rounded-full" />
         </motion.div>
