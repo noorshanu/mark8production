@@ -54,7 +54,6 @@ const IntroSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              whileHover={{ scale: 1.05, rotate: [0, -5, 5, 0] }}
               className="relative"
             >
               <div className="bg-black text-white rounded-2xl p-6 shadow-2xl border-4 border-black relative overflow-hidden">
@@ -72,17 +71,27 @@ const IntroSection = () => {
                   className="absolute inset-0 bg-yellow-500 rounded-full blur-3xl"
                 />
 
-                <div className="relative z-10 flex items-center gap-4">
-                  <motion.div className="text-5xl">
-                    <img
+                <div className="relative z-10 flex items-center gap-4 flex-col ">
+                  <div className="text-5xl">
+                    <motion.img
                       src={problem.img}
                       alt={problem.text}
-                      className="w-full h-full"
+                      className="w-full h-full cursor-pointer"
+                      whileHover={{ 
+                        scale: 1.2, 
+                        rotate: 15,
+                        y: -10,
+                        filter: "brightness(1.2)",
+                      }}
+                      transition={{ 
+                        duration: 0.3, 
+                        ease: "easeOut" 
+                      }}
                     />
-                  </motion.div>
-                  <div className="flex-1">
-                    <div className="text-2xl mb-2">❌</div>
-                    <p className="text-lg font-bold">{problem.text}</p>
+                  </div>
+                  <div className="flex-1 ">
+              
+                    <p className="text-base font-semibold">{problem.text}</p>
                   </div>
                 </div>
               </div>
