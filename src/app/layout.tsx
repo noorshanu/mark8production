@@ -4,6 +4,7 @@ import "./globals.css";
 
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import Loader from "./components/Loader";
 
 export const metadata: Metadata = {
   title: "Mark8 Production | Aap Business Sambhalo, Growth hum karwa denge",
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body
         className="bg-white text-black"
       >
+        <Loader />
         <NavBar />
         {children}
         <Footer />
