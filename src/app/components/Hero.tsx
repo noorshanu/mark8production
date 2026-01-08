@@ -14,7 +14,7 @@ const Hero = () => {
           <div className="">
             {/* Main Tagline */}
             <h2 className="text-sm font-medium text-black bg-yellow-500 px-4 py-2  font-tiktok-sans rounded-full w-fit">
-              Hum sirf post nahi karte
+            Aap Business Sambhalo,
            
             </h2>
             <h1 className="text-5xl sm:text-7xl font-bold leading-tight font-bangers">
@@ -29,7 +29,7 @@ const Hero = () => {
                 }}
                 whileHover={{ scale: 1.1, rotate: 5 }}
               >
-                BRAND{' '}
+               Growth 
               </motion.span>
               
               <motion.span
@@ -43,7 +43,7 @@ const Hero = () => {
                 }}
                 whileHover={{ scale: 1.1, y: -5 }}
               >
-                BANATE{' '}
+               hum karwa 
               </motion.span>
               
               <br />
@@ -59,7 +59,7 @@ const Hero = () => {
                 }}
                 whileHover={{ scale: 1.1, rotate: -5 }}
               >
-                HAIN.
+               denge.
               </motion.span>
             </h1>
 
