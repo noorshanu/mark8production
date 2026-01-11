@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiChevronLeft, FiChevronRight, FiLinkedin, FiInstagram, FiTwitter } from 'react-icons/fi'
+import Image from 'next/image'
 
 const OurTeam = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -10,69 +11,47 @@ const OurTeam = () => {
   const teamMembers = [
     {
       id: 1,
-      name: 'John Doe',
+      name: 'Rahul',
       role: 'Creative Director',
       description: 'Leading our creative vision with 10+ years of experience in digital marketing and brand strategy.',
-      image: '👨‍💼',
-      gradient: 'from-yellow-400 to-orange-500',
+      image: '/team/rahul.jpeg',
+      gradient: 'from-orange-500 to-red-500',
       social: {
-        linkedin: '#',
+     
         instagram: '#',
         twitter: '#',
       },
     },
     {
       id: 2,
-      name: 'Jane Smith',
+      name: 'Ismile',
       role: 'Video Production Lead',
       description: 'Expert in cinematic storytelling and video production, bringing brands to life through visual narratives.',
-      image: '👩‍🎬',
-      gradient: 'from-orange-500 to-red-500',
+     
+      image: '/team/ismile.JPG',
+      gradient: 'from-yellow-500 to-yellow-600',
       social: {
-        linkedin: '#',
+        
         instagram: '#',
         twitter: '#',
       },
     },
     {
       id: 3,
-      name: 'Mike Johnson',
-      role: 'Web Developer',
+      name: 'Noor',
+      role: 'Full Stack Developer',
       description: 'Full-stack developer specializing in modern web technologies and creating seamless user experiences.',
-      image: '👨‍💻',
-      gradient: 'from-yellow-500 to-yellow-600',
+
+      image: '/team/Noor.png',
+      gradient: 'from-yellow-400 to-orange-500',
       social: {
-        linkedin: '#',
+   
         instagram: '#',
         twitter: '#',
       },
     },
-    {
-      id: 4,
-      name: 'Sarah Williams',
-      role: 'Graphic Designer',
-      description: 'Creative designer with a passion for branding, visual identity, and creating memorable design experiences.',
-      image: '👩‍🎨',
-      gradient: 'from-orange-400 to-yellow-500',
-      social: {
-        linkedin: '#',
-        instagram: '#',
-        twitter: '#',
-      },
-    },
-    {
-      id: 5,
-      name: 'David Brown',
-      role: 'Social Media Manager',
-      description: 'Strategist and content creator driving engagement and growth across all social media platforms.',
-      image: '📱',
-      gradient: 'from-yellow-400 to-red-400',
-      social: {
-        linkedin: '#',
-        instagram: '#',
-        twitter: '#',
-      },
-    },
+
+   
   ]
 
   const nextSlide = () => {
@@ -146,27 +125,32 @@ const OurTeam = () => {
                           </div>
                         </div>
 
-                        {/* Member Image/Emoji */}
+                        {/* Member Image */}
                         <div className="absolute inset-0 flex items-center justify-center">
                           <motion.div
                             animate={{
-                              scale: [1, 1.1, 1],
+                              scale: [1, 1.05, 1],
                             }}
                             transition={{
                               duration: 4,
                               repeat: Infinity,
                               ease: 'easeInOut',
                             }}
-                            className="text-9xl"
+                            className="relative w-full h-full"
                           >
-                            {member.image}
+                            <Image
+                              src={member.image}
+                              alt={member.name}
+                              fill
+                              className="object-cover object-center"
+                              sizes="(max-width: 768px) 100vw, 50vw"
+                            />
                           </motion.div>
                         </div>
 
                         {/* Social Links */}
                         <div className="absolute bottom-8 left-8 flex gap-3">
                           {[
-                            { icon: FiLinkedin, href: member.social.linkedin, label: 'LinkedIn' },
                             { icon: FiInstagram, href: member.social.instagram, label: 'Instagram' },
                             { icon: FiTwitter, href: member.social.twitter, label: 'Twitter' },
                           ].map((social) => {
