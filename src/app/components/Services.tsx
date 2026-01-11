@@ -2,7 +2,8 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { FiArrowRight, FiInstagram, FiVideo, FiLayers, FiImage, FiUsers, FiGlobe, FiTrendingUp, FiCamera } from 'react-icons/fi'
+import { FiInstagram, FiVideo, FiLayers, FiImage, FiUsers, FiGlobe, FiTrendingUp, FiCamera } from 'react-icons/fi'
+import Image from 'next/image'
 
 const Services = () => {
   const services = [
@@ -12,6 +13,7 @@ const Services = () => {
       description: 'Creating engaging content and managing profiles across platforms. Specialized in Instagram reels, posts, story strategies, and Meta Ads with targeted campaigns to maximize your brand reach.',
       icon: FiInstagram,
       gradient: 'from-yellow-400 to-orange-500',
+      image: '/Services/instagram.avif',
     },
     {
       id: 2,
@@ -19,13 +21,15 @@ const Services = () => {
       description: 'High-engagement short-form video content that captures attention and drives conversions. Professional reel production optimized for maximum social media impact.',
       icon: FiVideo,
       gradient: 'from-yellow-500 to-red-500',
+      image: '/Services/reel.jpg',
     },
     {
       id: 3,
-      title: 'CGI Ads & Product Visualizations',
+      title: 'CGI Ads ',
       description: 'Stunning computer-generated imagery for advertisements and promotional content. Bring your products to life with photorealistic 3D visualizations.',
       icon: FiLayers,
       gradient: 'from-orange-400 to-yellow-500',
+      image: '/Services/cgi.jpg',
     },
     {
       id: 4,
@@ -33,6 +37,7 @@ const Services = () => {
       description: 'Complete branding solutions including logo design, branding assets, posters, banners, and marketing materials. Professional designs that make your brand stand out.',
       icon: FiImage,
       gradient: 'from-yellow-400 to-yellow-600',
+      image: '/Services/graphicdesigner.jpg',
     },
     {
       id: 5,
@@ -40,6 +45,7 @@ const Services = () => {
       description: 'Strategic campaigns leveraging influencers to promote your brand authentically. Connect with the right influencers to reach your target audience effectively.',
       icon: FiUsers,
       gradient: 'from-orange-500 to-yellow-400',
+      image: '/Services/influncer.avif',
     },
     {
       id: 6,
@@ -47,6 +53,7 @@ const Services = () => {
       description: 'Modern, responsive websites that perfectly represent your brand online. Custom-built solutions that are fast, beautiful, and conversion-optimized.',
       icon: FiGlobe,
       gradient: 'from-yellow-500 to-orange-400',
+      image: '/Services/webdesign.jpg',
     },
     {
       id: 7,
@@ -54,6 +61,7 @@ const Services = () => {
       description: 'Data-driven advertising campaigns focused on conversions and ROI. Advanced analytics and optimization strategies to maximize your marketing performance.',
       icon: FiTrendingUp,
       gradient: 'from-red-500 to-orange-500',
+      image: '/Services/performance.avif',
     },
     {
       id: 8,
@@ -61,6 +69,7 @@ const Services = () => {
       description: 'Aerial cinematography and professional videography services. Capture stunning visuals from unique perspectives that elevate your brand storytelling.',
       icon: FiCamera,
       gradient: 'from-yellow-400 to-red-400',
+      image: '/Services/droneshoot.avif',
     },
   ]
 
@@ -98,11 +107,10 @@ const Services = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
-          What We  <span className="text-yellow-500">Actually Do ?</span>
+            What We <span className="text-yellow-500">Actually Do ?</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Hum sirf camera nahi chalate,
-          story chalate hain.
+            Hum sirf camera nahi chalate, story chalate hain.
           </p>
           <div className="w-24 h-1 bg-yellow-500 mx-auto mt-6 rounded-full" />
         </motion.div>
@@ -116,7 +124,6 @@ const Services = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {services.map((service) => {
-            const IconComponent = service.icon
             return (
               <motion.div
                 key={service.id}
@@ -124,76 +131,36 @@ const Services = () => {
                 whileHover={{ y: -10, scale: 1.02 }}
                 className="group relative"
               >
-                <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-gray-100 hover:border-yellow-500 h-full flex flex-col">
-                  {/* Image Placeholder */}
-                  <div className="relative h-38 bg-gray-200 overflow-hidden">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-20`} />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <motion.div
-                        whileHover={{ scale: 1.2, rotate: 5 }}
-                        transition={{ duration: 0.3 }}
-                        className="relative z-10"
-                      >
-                        <IconComponent className="w-16 h-16 text-black" />
-                      </motion.div>
-                    </div>
-                    {/* Decorative Pattern */}
-                    <div className="absolute inset-0 opacity-10">
-                      <svg width="100%" height="100%">
-                        <pattern id={`pattern-${service.id}`} x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                          <circle cx="20" cy="20" r="2" fill="black" />
-                        </pattern>
-                        <rect width="100%" height="100%" fill={`url(#pattern-${service.id})`} />
-                      </svg>
-                    </div>
-                    {/* Hover Overlay */}
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                      className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-90 transition-opacity duration-300`}
+                <div className="h-full flex flex-col">
+                  {/* Image with Text Overlay */}
+                  <div className="relative h-[400px] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className="object-cover rounded-2xl"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                     />
-                  </div>
+                    {/* Dark Overlay for text readability */}
+                    <div className="absolute inset-0 bg-black/40" />
+                    
+                    {/* Text Overlay - Bottom Center */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-end p-6 text-center z-10">
+                      {/* Title */}
+                      <h3 className="text-xl font-bold text-white mb-4 group-hover:text-yellow-500 transition-colors">
+                        {service.title}
+                      </h3>
 
-                  {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col">
-                    {/* Icon Badge */}
-                    {/* <div className="mb-4">
-                      <motion.div
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.5 }}
-                        className={`w-12 h-12 rounded-lg bg-gradient-to-br ${service.gradient} flex items-center justify-center shadow-md`}
+                      {/* View Details Button */}
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
                       >
-                        <IconComponent className="w-6 h-6 text-white" />
-                      </motion.div>
-                    </div> */}
-
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-black mb-3 group-hover:text-yellow-500 transition-colors">
-                      {service.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-4">
-                      {service.description}
-                    </p>
-
-                    {/* CTA Arrow */}
-                    {/* <motion.div
-                      initial={{ x: 0 }}
-                      whileHover={{ x: 5 }}
-                      className="flex items-center text-yellow-500 font-semibold text-sm group-hover:text-black transition-colors"
-                    >
-                      Learn More
-                      <FiArrowRight className="ml-2 w-4 h-4" />
-                    </motion.div> */}
+                        View Details
+                      </motion.button>
+                    </div>
                   </div>
-
-                  {/* Bottom Accent Line */}
-                  <motion.div
-                    initial={{ scaleX: 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    className={`h-1 bg-gradient-to-r ${service.gradient}`}
-                  />
                 </div>
               </motion.div>
             )
