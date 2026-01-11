@@ -1,9 +1,67 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useEffect, useState, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { FiArrowRight, FiPlay } from 'react-icons/fi'
+
+// Animated Counter Component
+const AnimatedCounter = ({ value, label, delay = 0 }: { value: string; label: string; delay?: number }) => {
+  const [count, setCount] = useState(0)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  useEffect(() => {
+    if (!isInView) return
+
+    // Extract number and suffix from value (e.g., "10K+" -> 10, "K+")
+    const match = value.match(/(\d+)([K%+]*)/)
+    if (!match) return
+
+    const num = parseInt(match[1])
+    const duration = 2000 // 2 seconds
+    const steps = 60
+    const increment = num / steps
+    const stepDuration = duration / steps
+
+    let current = 0
+    const timer = setInterval(() => {
+      current += increment
+      if (current >= num) {
+        setCount(num)
+        clearInterval(timer)
+      } else {
+        setCount(Math.floor(current))
+      }
+    }, stepDuration)
+
+    return () => clearInterval(timer)
+  }, [isInView, value])
+
+  // Determine suffix from original value
+  const suffix = value.includes('K') ? 'K+' : value.includes('%') ? '%' : '+'
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+      transition={{ duration: 0.5, delay }}
+      className="text-center"
+    >
+      <motion.div
+        key={count}
+        initial={{ scale: 1.2, opacity: 0.5 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.2 }}
+        className="text-3xl font-bold text-yellow-500"
+      >
+        {count}{suffix}
+      </motion.div>
+      <div className="text-sm text-gray-600 mt-1">{label}</div>
+    </motion.div>
+  )
+}
 
 const Hero = () => {
   return (
@@ -13,7 +71,7 @@ const Hero = () => {
           {/* Left Side - Content */}
           <div className="">
             {/* Main Tagline */}
-            <h2 className="text-sm font-medium text-black bg-yellow-500 px-4 py-2  font-tiktok-sans rounded-full w-fit">
+            <h2 className="text-sm font-medium text-black bg-white-500 shadow-2xl px-4 py-2 border-2 border-yellow-500  font-tiktok-sans rounded-full w-fit">
             Aap Business Sambhalo,
            
             </h2>
@@ -70,8 +128,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
               className="text-sm md:text-base text-gray-700 "
             >
-            Swagat hai aapka North East ki sabse creative marketing agency mein
-            jahan ideas kabhi boring nahi hote <span className="text-yellow-500 font-semibold">aur results sirf promises nahi… </span> <br /> properly deliver hote hain.
+           Welcome to North East’s most creative marketing agency  <br/>where ideas never get boring, <span className="text-yellow-500 font-semibold">and results aren’t just promised… </span> <br /> they’re delivered.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -94,29 +151,11 @@ const Hero = () => {
             </motion.div>
 
             {/* Stats or Features */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="grid grid-cols-3 gap-6 pt-8"
-            >
-              {[
-                { number: '10K+', label: 'Happy Clients' },
-                { number: '50K+', label: 'Projects Done' },
-                { number: '99%', label: 'Satisfaction' },
-              ].map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
-                  className="text-center"
-                >
-                  <div className="text-3xl font-bold text-yellow-500">{stat.number}</div>
-                  <div className="text-sm text-gray-600 mt-1">{stat.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
+            <div className="grid grid-cols-3 gap-6 pt-8">
+              <AnimatedCounter value="10K+" label="Happy Clients" delay={0.7} />
+              <AnimatedCounter value="50K+" label="Projects Done" delay={0.8} />
+              <AnimatedCounter value="99%" label="Satisfaction" delay={0.9} />
+            </div>
           </div>
 
           {/* Right Side - Image */}
@@ -180,7 +219,7 @@ const Hero = () => {
                         className="text-center"
                       >
                      <img src="/hero.png" alt="Showcase Your Brand" className=" mx-auto  rounded-3xl h-[400px]"  />
-                        <p className="mt-3 text-xl font-semibold text-gray-800 bg-yellow-500 px-4 py-2 rounded-full w-fit mx-auto">
+                        <p className="mt-3 text-xl font-semibold text-gray-800 bg-white-500 shadow-2xl px-4 py-2 border-2 border-yellow-500 rounded-full w-fit mx-auto">
                           Showcase Your Brand
                         </p>
                       </motion.div>
