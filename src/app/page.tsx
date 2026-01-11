@@ -1,20 +1,23 @@
 import Hero from "./components/Hero";
-// import ClientMark from "./components/ClientMark";
+
 import Services from "./components/Services";
 import RecentProjects from "./components/RecentProjects";
 import Cta from "./components/Cta";
-import OurTeam from "./components/OurTeam";
+
 import IntroSection from "./components/IntroSection";
+import ClientFeedback from "./components/ClientFeedback";
 export default function Home() {
   return (
 <>
 <Hero />
-{/* <ClientMark /> */}
+
 <IntroSection />
 <Services />
 <RecentProjects />
+
+
+<ClientFeedback />
 <Cta />
-<OurTeam />
 </>
   );
 }

@@ -14,7 +14,7 @@ const Cta = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section className="relative bg-[#fdd820] py-20 overflow-hidden">
+    <section className="relative bg-[#fdd820] py-2 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
