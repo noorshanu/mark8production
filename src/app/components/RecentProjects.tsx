@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 import { motion, AnimatePresence } from 'framer-motion'
 import Marquee from 'react-fast-marquee'
@@ -6,30 +7,50 @@ import { useState } from 'react'
 
 const RecentProjects = () => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
+  const [selectedVideoType, setSelectedVideoType] = useState<'youtube' | 'local' | null>(null)
+  
   const videoProjects = [
     {
       id: 1,
-      title: 'Reels',
-      category: 'Social Media',
+      title: 'Reel 1',
+      category: 'Reels',
       thumbnail: 'bg-gradient-to-br from-orange-600 to-red-600',
+      videoSrc: '/reels/reel1.mp4',
     },
     {
       id: 2,
-      title: 'Social Media Ads',
-      category: 'Advertising',
+      title: 'Reel 2',
+      category: 'Reels',
       thumbnail: 'bg-gradient-to-br from-purple-600 to-pink-600',
+      videoSrc: '/reels/reel2.mov',
     },
     {
       id: 3,
-      title: 'Talkhead Shorts',
-      category: 'Content Creation',
+      title: 'Reel 3',
+      category: 'Reels',
       thumbnail: 'bg-gradient-to-br from-blue-600 to-cyan-600',
+      videoSrc: '/reels/reel3.mp4',
     },
     {
       id: 4,
-      title: 'Motion Invitation',
-      category: 'Animation',
+      title: 'Reel 4',
+      category: 'Reels',
       thumbnail: 'bg-gradient-to-br from-green-600 to-emerald-600',
+      videoSrc: '/reels/reel4.mov',
+    },
+    {
+      id: 5,
+      title: 'Reel 5',
+      category: 'Reels',
+      thumbnail: 'bg-gradient-to-br from-indigo-600 to-purple-600',
+      videoSrc: '/reels/reel5.mov',
+    },
+    {
+      id: 6,
+      title: 'Reel 6',
+      category: 'Reels',
+      thumbnail: 'bg-gradient-to-br from-pink-600 to-rose-600',
+      videoSrc: '/reels/reel6.mp4',
     },
   ]
 
@@ -193,42 +214,72 @@ const RecentProjects = () => {
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-10" />
                     
                     {/* Screen */}
-                    <div className="relative bg-black rounded-[2rem] overflow-hidden aspect-[9/16]">
-                      {/* Video Thumbnail */}
-                      <div className={`absolute inset-0 ${project.thumbnail}`}>
-                        {/* Pattern Overlay */}
-                        <div className="absolute inset-0 opacity-20">
-                          <svg width="100%" height="100%">
-                            <pattern id={`video-pattern-${project.id}-${index}`} x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                              <circle cx="10" cy="10" r="1" fill="white" />
-                            </pattern>
-                            <rect width="100%" height="100%" fill={`url(#video-pattern-${project.id}-${index})`} />
-                          </svg>
+                    <div 
+                      className="relative bg-black rounded-[2rem] overflow-hidden aspect-[9/16] cursor-pointer"
+                      onClick={() => {
+                        if (project.videoSrc) {
+                          setSelectedVideo(project.videoSrc)
+                          setSelectedVideoType('local')
+                        }
+                      }}
+                    >
+                      {/* Video Preview/Thumbnail */}
+                      {project.videoSrc ? (
+                        <video
+                          src={project.videoSrc}
+                          className="absolute inset-0 w-full h-full object-cover"
+                          muted
+                          loop
+                          playsInline
+                          onMouseEnter={(e) => {
+                            const video = e.currentTarget
+                            video.play()
+                          }}
+                          onMouseLeave={(e) => {
+                            const video = e.currentTarget
+                            video.pause()
+                            video.currentTime = 0
+                          }}
+                        />
+                      ) : (
+                        <div className={`absolute inset-0 ${project.thumbnail}`}>
+                          {/* Pattern Overlay */}
+                          <div className="absolute inset-0 opacity-20">
+                            <svg width="100%" height="100%">
+                              <pattern id={`video-pattern-${project.id}-${index}`} x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <circle cx="10" cy="10" r="1" fill="white" />
+                              </pattern>
+                              <rect width="100%" height="100%" fill={`url(#video-pattern-${project.id}-${index})`} />
+                            </svg>
+                          </div>
                         </div>
-                        
-                        {/* Play Button */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <motion.div
-                            whileHover={{ scale: 1.2 }}
-                            className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-white/30"
-                          >
-                            <FiPlay className="w-8 h-8 text-white ml-1" />
-                          </motion.div>
-                        </div>
+                      )}
+                      
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                      
+                      {/* Play Button */}
+                      <div className="absolute inset-0 flex items-center justify-center z-10">
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20"
+                        >
+                          <FiPlay className="w-4 h-4 text-white ml-0.5" />
+                        </motion.div>
+                      </div>
 
-                        {/* Category Badge */}
-                        <div className="absolute top-4 left-4">
-                          <span className="px-3 py-1 bg-black/50 backdrop-blur-sm text-white text-xs font-semibold rounded-full">
-                            {project.category}
-                          </span>
-                        </div>
+                      {/* Category Badge */}
+                      <div className="absolute top-4 left-4 z-10">
+                        <span className="px-3 py-1 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold rounded-full">
+                          {project.category}
+                        </span>
                       </div>
 
                       {/* Hover Overlay */}
                       <motion.div
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 1 }}
-                        className="absolute inset-0 bg-yellow-500/20 backdrop-blur-sm flex items-center justify-center"
+                        className="absolute inset-0 bg-yellow-500/20 backdrop-blur-sm flex items-center justify-center z-10"
                       >
                         <motion.div
                           initial={{ scale: 0.8 }}
@@ -236,17 +287,17 @@ const RecentProjects = () => {
                           className="text-white text-center px-4"
                         >
                           <div className="text-lg font-bold mb-1">{project.title}</div>
-                          <div className="text-sm opacity-90">Tap to view</div>
+                          <div className="text-sm opacity-90">Tap to watch</div>
                         </motion.div>
                       </motion.div>
                     </div>
 
                     {/* Project Title Below */}
-                    <div className="mt-4 text-center">
+                    {/* <div className="mt-4 text-center">
                       <h4 className="text-white font-semibold text-sm group-hover:text-yellow-500 transition-colors">
                         {project.title}
                       </h4>
-                    </div>
+                    </div> */}
                   </div>
                 </motion.div>
               ))}
@@ -287,7 +338,7 @@ const RecentProjects = () => {
                   className="mx-4 group cursor-pointer"
                 >
                   {/* Laptop Frame */}
-                  <div className="relative bg-gray-800 rounded-lg shadow-2xl w-[400px]">
+                  <div className="relative bg-gray-800 rounded-lg shadow-2xl w-[600px]">
                     {/* Laptop Top (Screen) */}
                     <div className="relative">
                       {/* Screen Bezel */}
@@ -301,6 +352,7 @@ const RecentProjects = () => {
                           onClick={() => {
                             if (project.videoId) {
                               setSelectedVideo(project.videoId)
+                              setSelectedVideoType('youtube')
                             }
                           }}
                         >
@@ -336,18 +388,18 @@ const RecentProjects = () => {
                           <div className="absolute inset-0 flex items-center justify-center z-10">
                             <motion.div
                               whileHover={{ scale: 1.2 }}
-                              className="w-20 h-20 bg-red-600/90 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-white/30 shadow-2xl"
+                              className="w-10 h-10 bg-transparent backdrop-blur-md rounded-full flex items-center justify-center border-2 border-white/30 shadow-2xl"
                             >
-                              <FiPlay className="w-10 h-10 text-white ml-1" />
+                              <FiPlay className="w-5 h-5 text-white ml-1" />
                             </motion.div>
                           </div>
 
                           {/* Category Badge */}
-                          <div className="absolute top-4 left-4 z-10">
+                          {/* <div className="absolute top-4 left-4 z-10">
                             <span className="px-3 py-1 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold rounded-full">
                               {project.category}
                             </span>
-                          </div>
+                          </div> */}
 
                           {/* Hover Overlay */}
                           <motion.div
@@ -375,11 +427,11 @@ const RecentProjects = () => {
                     </div>
 
                     {/* Project Title Below */}
-                    <div className="mt-4 text-center">
+                    {/* <div className="mt-4 text-center">
                       <h4 className="text-white font-semibold text-sm group-hover:text-yellow-500 transition-colors">
                         {project.title}
                       </h4>
-                    </div>
+                    </div> */}
                   </div>
                 </motion.div>
               ))}
@@ -543,7 +595,10 @@ const RecentProjects = () => {
             >
               {/* Close Button */}
               <motion.button
-                onClick={() => setSelectedVideo(null)}
+                onClick={() => {
+                  setSelectedVideo(null)
+                  setSelectedVideoType(null)
+                }}
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
                 className="absolute top-4 right-4 z-20 w-12 h-12 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-red-600 transition-colors shadow-lg"
@@ -552,16 +607,29 @@ const RecentProjects = () => {
                 <FiX className="w-6 h-6" />
               </motion.button>
 
-              {/* YouTube Embed with Autoplay */}
-              <iframe
-                width="100%"
-                height="100%"
-                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1`}
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="w-full h-full"
-              />
+              {/* Video Player - YouTube or Local */}
+              {selectedVideoType === 'youtube' ? (
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1`}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              ) : (
+                <video
+                  src={selectedVideo || ''}
+                  autoPlay
+                  controls
+                  loop
+                  playsInline
+                  className="w-full h-full"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              )}
             </motion.div>
           </motion.div>
         )}
