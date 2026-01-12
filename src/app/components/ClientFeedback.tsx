@@ -108,7 +108,7 @@ const ClientFeedback = () => {
             What Our <span className="text-yellow-500">Clients Say</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Real feedback from satisfied customers
+            Feedback from our satisfied customers
           </p>
           <div className="w-24 h-1 bg-yellow-500 mx-auto mt-6 rounded-full" />
         </motion.div>
