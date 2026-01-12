@@ -4,10 +4,10 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  FaTelegram,
   FaInstagram,
   FaYoutube,
   FaFacebook,
+  FaWhatsapp,
 } from "react-icons/fa6";
 
 const Cta = () => {
@@ -58,17 +58,17 @@ const Cta = () => {
               </AnimatePresence>
             </motion.button>
             <div className="flex items-center gap-4">
-              <a href="#">
-                <FaTelegram className="text-black text-2xl" />
+              <a href="https://wa.me/918293893700">
+                <FaWhatsapp className="text-black text-2xl" />
               </a>
-              <a href="#">
+              <a href="https://www.instagram.com/mark8productions/">
                 <FaInstagram className="text-black text-2xl" />
               </a>
 
-              <a href="#">
+              <a href="https://www.youtube.com/@MARK8PRODUCTIONS">
                 <FaYoutube className="text-black text-2xl" />
               </a>
-              <a href="#">
+              <a href="https://www.facebook.com/mark8productions/">
                 <FaFacebook className="text-black text-2xl" />
               </a>
             </div>

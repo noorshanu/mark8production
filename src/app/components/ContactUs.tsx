@@ -86,7 +86,7 @@ const ContactUs = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-black mb-1">Email</h4>
-                  <p className="text-gray-600">info@mark8production.com</p>
+                  <p className="text-gray-600">team@mark8production.com</p>
                 </div>
               </motion.div>
 
@@ -99,7 +99,7 @@ const ContactUs = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-black mb-1">Phone</h4>
-                  <p className="text-gray-600">+91 123 456 7890</p>
+                  <p className="text-gray-600">+91-8293893700, +91-7384408080</p>
                 </div>
               </motion.div>
 
@@ -112,7 +112,7 @@ const ContactUs = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-black mb-1">Address</h4>
-                  <p className="text-gray-600">Your City, Your State, India</p>
+                  <p className="text-gray-600">VYOM SACHITRA, 4th Floor, Pranami Mandir Road, PUNJABI PARA, SILIGURI, 734001</p>
                 </div>
               </motion.div>
             </div>
@@ -125,8 +125,7 @@ const ContactUs = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-black mb-2">Business Hours</h4>
-                  <p className="text-sm text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</p>
-                  <p className="text-sm text-gray-600">Saturday: 10:00 AM - 4:00 PM</p>
+                  <p className="text-sm text-gray-600">Monday - Saturday: 10:00 AM - 7:00 PM</p>
                   <p className="text-sm text-gray-600">Sunday: Closed</p>
                 </div>
               </div>
@@ -138,16 +137,15 @@ const ContactUs = () => {
               <div className="flex flex-wrap gap-3">
                 {[
                   { icon: FiInstagram, label: 'Instagram', color: 'hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500' },
-                  { icon: FiFacebook, label: 'Facebook', color: 'hover:bg-blue-600' },
+                  { icon: FiYoutube, label: 'Youtube', color: 'hover:bg-red-600' },
                   { icon: FiLinkedin, label: 'LinkedIn', color: 'hover:bg-blue-700' },
                   { icon: FiTwitter, label: 'Twitter', color: 'hover:bg-sky-500' },
-                  { icon: FiYoutube, label: 'YouTube', color: 'hover:bg-red-600' },
                 ].map((social) => {
                   const Icon = social.icon
                   return (
                     <motion.a
                       key={social.label}
-                      href="#"
+                      href={social.label === 'Youtube' ? 'https://www.youtube.com/@MARK8PRODUCTIONS' : social.label === 'Instagram' ? 'https://www.instagram.com/mark8productions/' : social.label === 'LinkedIn' ? 'https://www.linkedin.com/company/mark8productions/' : social.label === 'Twitter' ? 'https://twitter.com/mark8productions/' : ''}
                       whileHover={{ scale: 1.1, y: -5, rotate: 5 }}
                       whileTap={{ scale: 0.95 }}
                       className={`w-12 h-12 bg-black rounded-lg flex items-center justify-center text-white ${social.color} transition-all shadow-lg`}

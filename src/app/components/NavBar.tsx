@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMenu, FiX, FiInstagram } from 'react-icons/fi'
-import { FaWhatsapp, FaTelegram } from 'react-icons/fa'
+import { FaWhatsapp, FaTelegram, FaYoutube } from 'react-icons/fa'
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -97,19 +97,19 @@ const NavBar = () => {
             </motion.a>
             
             <motion.a
-              href="https://t.me/yourusername"
+              href="https://www.youtube.com/@MARK8PRODUCTIONS"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1, y: -3 }}
               whileTap={{ scale: 0.95 }}
-              className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white hover:bg-blue-600 transition-colors shadow-lg"
-              aria-label="Telegram"
+              className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center text-white hover:bg-red-600 transition-colors shadow-lg"
+              aria-label="Youtube"
             >
-              <FaTelegram className="w-5 h-5" />
+              <FaYoutube className="w-5 h-5" />
             </motion.a>
             
             <motion.a
-              href="https://instagram.com/yourusername"
+              href="https://www.instagram.com/mark8productions/"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1, y: -3 }}

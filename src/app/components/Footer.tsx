@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { FiInstagram, FiFacebook, FiLinkedin, FiTwitter, FiMail, FiPhone } from 'react-icons/fi'
+import { FiInstagram, FiFacebook, FiLinkedin, FiTwitter, FiMail, FiPhone, FiMapPin, FiYoutube } from 'react-icons/fi'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -18,8 +18,8 @@ const Footer = () => {
   ]
 
   const socialLinks = [
-    { icon: FiInstagram, href: '#', label: 'Instagram' },
-    { icon: FiFacebook, href: '#', label: 'Facebook' },
+    { icon: FiInstagram, href: 'https://www.instagram.com/mark8productions/', label: 'Instagram' },
+    { icon: FiYoutube, href: 'https://www.youtube.com/@MARK8PRODUCTIONS', label: 'Youtube' },
     { icon: FiLinkedin, href: '#', label: 'LinkedIn' },
     { icon: FiTwitter, href: '#', label: 'Twitter' },
   ]
@@ -75,11 +75,15 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 text-gray-400">
                 <FiMail className="w-4 h-4 text-yellow-500" />
-                <span>info@mark8production.com</span>
+                <span>team@mark8production.com</span>
               </li>
               <li className="flex items-center gap-2 text-gray-400">
                 <FiPhone className="w-4 h-4 text-yellow-500" />
-                <span>+91 123 456 7890</span>
+                <span>+91-8293893700, +91-7384408080</span>
+              </li>
+              <li className="flex items-center gap-2 text-gray-400">
+                <FiMapPin className="w-8 h-8 text-yellow-500" />
+                <span>VYOM SACHITRA, 4th Floor, Pranami Mandir Road, PUNJABI PARA, SILIGURI, 734001</span>
               </li>
             </ul>
 
