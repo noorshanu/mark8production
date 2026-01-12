@@ -133,7 +133,7 @@ const ClientFeedback = () => {
                         opacity: transform.opacity,
                       }}
                       transition={{
-                        duration: 0.8,
+                        duration: 0.6,
                         ease: [0.4, 0, 0.2, 1],
                       }}
                       style={{
@@ -142,6 +142,7 @@ const ClientFeedback = () => {
                         width: '100%',
                         height: '100%',
                         transformStyle: 'preserve-3d',
+                        willChange: 'transform, opacity',
                       }}
                     >
                       <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl">
@@ -151,6 +152,7 @@ const ClientFeedback = () => {
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, 50vw"
+                          loading="lazy"
                         />
                       </div>
                     </motion.div>
@@ -203,13 +205,14 @@ const ClientFeedback = () => {
                     {testimonials[activeIndex].quote.split(' ').map((word, i) => (
                       <motion.span
                         key={i}
-                        initial={{ opacity: 0, y: 10 }}
+                        initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{
-                          delay: i * 0.02,
-                          duration: 0.2,
+                          delay: i * 0.01,
+                          duration: 0.15,
                         }}
                         className="inline-block mr-1"
+                        style={{ willChange: 'transform, opacity' }}
                       >
                         {word}
                       </motion.span>
@@ -244,31 +247,20 @@ const ClientFeedback = () => {
         </div>
       </div>
 
-      {/* Background Decorative Elements */}
+      {/* Background Decorative Elements - Reduced for performance */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
         <motion.div
           animate={{
-            x: [0, 100, 0],
-            y: [0, 50, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          className="absolute top-20 left-10 w-96 h-96 bg-yellow-500/5 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, -40, 0],
+            x: [0, 50, 0],
+            y: [0, 30, 0],
           }}
           transition={{
             duration: 25,
             repeat: Infinity,
             ease: 'linear',
           }}
-          className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl"
+          className="absolute top-20 left-10 w-96 h-96 bg-yellow-500/5 rounded-full blur-3xl"
+          style={{ willChange: 'transform' }}
         />
       </div>
     </section>

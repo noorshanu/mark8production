@@ -7,21 +7,40 @@ import Image from 'next/image'
 const Loader = () => {
   const [loading, setLoading] = useState(true)
   const [progress, setProgress] = useState(0)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    // Simulate loading progress
+    setMounted(true)
+    // Faster, smoother loading - check if page is already loaded
+    if (document.readyState === 'complete') {
+      setProgress(100)
+      setTimeout(() => setLoading(false), 300)
+      return
+    }
+
+    // Simulate loading progress - faster
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval)
-          setTimeout(() => setLoading(false), 500)
+          setTimeout(() => setLoading(false), 200)
           return 100
         }
-        return prev + 2
+        // Faster increment for smoother progress
+        return Math.min(prev + 3, 100)
       })
-    }, 50)
+    }, 30)
 
-    return () => clearInterval(interval)
+    // Fallback - always hide after max 2 seconds
+    const timeout = setTimeout(() => {
+      setLoading(false)
+      clearInterval(interval)
+    }, 2000)
+
+    return () => {
+      clearInterval(interval)
+      clearTimeout(timeout)
+    }
   }, [])
 
   const funnyMessages = [
@@ -42,14 +61,17 @@ const Loader = () => {
     return () => clearInterval(messageInterval)
   }, [])
 
+  if (!mounted) return null
+
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {loading && (
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
           className="fixed inset-0 z-[9999] bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 flex items-center justify-center"
+          style={{ willChange: 'opacity' }}
         >
           <div className="text-center">
             {/* Logo with Animation */}
@@ -73,6 +95,7 @@ const Loader = () => {
                   ease: 'easeInOut',
                 }}
                 className="relative w-48 h-24 mx-auto"
+                style={{ willChange: 'transform' }}
               >
                 <Image
                   src="/logo.png"
@@ -174,14 +197,12 @@ const Loader = () => {
             </div>
           </div>
 
-          {/* Background Animated Elements */}
+          {/* Background Animated Elements - Reduced for performance */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             {[
               { x: 100, y: -80 },
               { x: -120, y: 60 },
               { x: 150, y: 100 },
-              { x: -90, y: -120 },
-              { x: 80, y: 140 },
             ].map((offset, i) => (
               <motion.div
                 key={i}
@@ -189,18 +210,19 @@ const Loader = () => {
                   x: [0, offset.x],
                   y: [0, offset.y],
                   scale: [0, 1, 0],
-                  opacity: [0, 0.3, 0],
+                  opacity: [0, 0.2, 0],
                 }}
                 transition={{
-                  duration: 3 + i,
+                  duration: 4 + i,
                   repeat: Infinity,
                   ease: 'easeInOut',
                   delay: i * 0.5,
                 }}
                 className="absolute w-32 h-32 bg-white/20 rounded-full blur-2xl"
                 style={{
-                  left: `${20 + i * 15}%`,
-                  top: `${20 + i * 15}%`,
+                  left: `${20 + i * 20}%`,
+                  top: `${20 + i * 20}%`,
+                  willChange: 'transform, opacity',
                 }}
               />
             ))}

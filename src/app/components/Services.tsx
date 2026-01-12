@@ -128,8 +128,9 @@ const Services = () => {
               <motion.div
                 key={service.id}
                 variants={cardVariants}
-                whileHover={{ y: -10, scale: 1.02 }}
+                whileHover={{ y: -8, scale: 1.01 }}
                 className="group relative"
+                style={{ willChange: 'transform' }}
               >
                 <div className="h-full flex flex-col">
                   {/* Image with Text Overlay */}
@@ -140,6 +141,7 @@ const Services = () => {
                       fill
                       className="object-cover rounded-2xl"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      loading="lazy"
                     />
                     {/* Dark Overlay for text readability */}
                     <div className="absolute inset-0 bg-black/40" />
@@ -168,31 +170,20 @@ const Services = () => {
         </motion.div>
       </div>
 
-      {/* Background Decorative Elements */}
+      {/* Background Decorative Elements - Reduced for performance */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
         <motion.div
           animate={{
-            x: [0, 100, 0],
-            y: [0, 50, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          className="absolute top-20 left-10 w-96 h-96 bg-yellow-200 rounded-full blur-3xl opacity-10"
-        />
-        <motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, -40, 0],
+            x: [0, 50, 0],
+            y: [0, 30, 0],
           }}
           transition={{
             duration: 25,
             repeat: Infinity,
             ease: 'linear',
           }}
-          className="absolute bottom-20 right-10 w-96 h-96 bg-orange-200 rounded-full blur-3xl opacity-10"
+          className="absolute top-20 left-10 w-96 h-96 bg-yellow-200 rounded-full blur-3xl opacity-5"
+          style={{ willChange: 'transform' }}
         />
       </div>
     </section>

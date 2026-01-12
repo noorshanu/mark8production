@@ -1,9 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 import { motion, AnimatePresence } from 'framer-motion'
 import Marquee from 'react-fast-marquee'
 import { FiPlay, FiExternalLink, FiCode, FiImage, FiX } from 'react-icons/fi'
 import { useState } from 'react'
+import Image from 'next/image'
 
 const RecentProjects = () => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
@@ -358,14 +358,14 @@ const RecentProjects = () => {
                         >
                           {/* YouTube Thumbnail */}
                           {project.videoId ? (
-                            <img
+                            <Image
                               src={`https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg`}
                               alt={project.title}
-                              className="absolute inset-0 w-full h-full object-cover"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement
-                                target.style.display = 'none'
-                              }}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, 33vw"
+                              loading="lazy"
+                              onError={() => {}}
                             />
                           ) : (
                             <div className={`absolute inset-0 ${project.thumbnail}`}>
@@ -547,31 +547,20 @@ const RecentProjects = () => {
         </div>
       </div>
 
-      {/* Background Decorative Elements */}
+      {/* Background Decorative Elements - Reduced for performance */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
         <motion.div
           animate={{
-            x: [0, 100, 0],
-            y: [0, 50, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          className="absolute top-20 left-10 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, -40, 0],
+            x: [0, 50, 0],
+            y: [0, 30, 0],
           }}
           transition={{
             duration: 25,
             repeat: Infinity,
             ease: 'linear',
           }}
-          className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl"
+          className="absolute top-20 left-10 w-96 h-96 bg-yellow-500/5 rounded-full blur-3xl"
+          style={{ willChange: 'transform' }}
         />
       </div>
 

@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import {
   FaInstagram,
   FaYoutube,
@@ -73,8 +73,15 @@ const Cta = () => {
               </a>
             </div>
           </div>
-          <div>
-            <img src="/cta.png" alt="cta" className=" mx-auto" />
+          <div className="relative w-full h-96">
+            <Image
+              src="/cta.png"
+              alt="cta"
+              fill
+              className="object-contain mx-auto"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>

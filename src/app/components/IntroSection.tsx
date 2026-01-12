@@ -1,7 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const IntroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -17,11 +17,11 @@ const IntroSection = () => {
     { src: "/part2.png", alt: "Team Part 2" },
   ];
 
-  // Auto-play slider
+  // Auto-play slider - optimized
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
-    }, 3000); // Change slide every 3 seconds
+    }, 4000); // Change slide every 4 seconds for smoother transition
 
     return () => clearInterval(interval);
   }, [sliderImages.length]);
@@ -74,37 +74,43 @@ const IntroSection = () => {
               className="relative"
             >
               <div className="bg-white shadow-2xl text-white rounded-2xl p-6  border border-black relative overflow-hidden">
-                {/* Animated Background */}
+                {/* Animated Background - Reduced for performance */}
                 <motion.div
                   animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.1, 0.2, 0.1],
+                    scale: [1, 1.1, 1],
+                    opacity: [0.08, 0.15, 0.08],
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 4,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
                   className="absolute inset-0 bg-yellow-500 rounded-full blur-3xl"
+                  style={{ willChange: 'transform, opacity' }}
                 />
 
                 <div className="relative z-10 flex items-center gap-4 flex-col ">
-                  <div className="text-5xl">
-                    <motion.img
-                      src={problem.img}
-                      alt={problem.text}
-                      className="w-full h-full cursor-pointer"
+                  <div className="relative w-full h-32">
+                    <motion.div
                       whileHover={{
-                        scale: 1.2,
-                        rotate: 15,
-                        y: -10,
-                        filter: "brightness(1.2)",
+                        scale: 1.1,
+                        y: -5,
                       }}
                       transition={{
                         duration: 0.3,
                         ease: "easeOut",
                       }}
-                    />
+                      style={{ willChange: 'transform' }}
+                      className="relative w-full h-full"
+                    >
+                      <Image
+                        src={problem.img}
+                        alt={problem.text}
+                        fill
+                        className="object-contain cursor-pointer"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    </motion.div>
                   </div>
                   <div className="flex-1 ">
                     <p className="text-base font-semibold text-black">
@@ -141,17 +147,18 @@ const IntroSection = () => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -50 }}
                         transition={{
-                          duration: 0.7,
-                          ease: "easeInOut",
+                          duration: 0.4,
+                          ease: [0.4, 0, 0.2, 1],
                         }}
                         className="absolute inset-0"
+                        style={{ willChange: 'transform, opacity' }}
                       >
-                        <motion.img
+                        <Image
                           src={image.src}
                           alt={image.alt}
-                          className="w-full h-full object-cover"
-                          whileHover={{ scale: 1.05 }}
-                          transition={{ duration: 0.3 }}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 50vw"
                         />
                         {/* Gradient Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
