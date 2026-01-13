@@ -33,15 +33,15 @@ const IntroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
           className="text-center mb-4"
         >
           <h2 className="text-4xl md:text-6xl font-bold text-black mb-2 leading-tight font-bangers">
             Sach batao...{" "}
             <motion.span
               animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 2 }}
+              transition={{ duration: 0.4, repeat: Infinity, repeatDelay: 1.5 }}
               className="inline-block"
             >
               🤔
@@ -53,8 +53,8 @@ const IntroSection = () => {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+          transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
           className="text-center mb-4"
         >
           <p className="text-base sm:text-xl font-medium text-black font-tiktok-sans">
@@ -69,8 +69,8 @@ const IntroSection = () => {
               key={index}
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+              viewport={{ once: true, margin: "-50px", amount: 0.2 }}
+              transition={{ duration: 0.3, delay: index * 0.05, ease: "easeOut" }}
               className="relative"
             >
               <div className="bg-white shadow-2xl text-white rounded-2xl p-6  border border-black relative overflow-hidden">
@@ -81,7 +81,7 @@ const IntroSection = () => {
                     opacity: [0.08, 0.15, 0.08],
                   }}
                   transition={{
-                    duration: 4,
+                    duration: 3,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
@@ -97,7 +97,7 @@ const IntroSection = () => {
                         y: -5,
                       }}
                       transition={{
-                        duration: 0.3,
+                        duration: 0.2,
                         ease: "easeOut",
                       }}
                       style={{ willChange: 'transform' }}
@@ -129,8 +129,8 @@ const IntroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+          transition={{ duration: 0.3, delay: 0.2, ease: "easeOut" }}
           className=" p-8 md:p-12  relative overflow-hidden"
         >
           <div className="relative z-10">
@@ -147,7 +147,7 @@ const IntroSection = () => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -50 }}
                         transition={{
-                          duration: 0.4,
+                          duration: 0.25,
                           ease: [0.4, 0, 0.2, 1],
                         }}
                         className="absolute inset-0"
@@ -241,8 +241,8 @@ const IntroSection = () => {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
+                  viewport={{ once: true, margin: "-50px", amount: 0.2 }}
+                  transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
                   className="text-center mb-4"
                 >
                   <div className="inline-block bg-white text-black rounded-full px-8 py-4 shadow-2xl">
@@ -251,16 +251,16 @@ const IntroSection = () => {
                         scale: [1, 1.05, 1],
                       }}
                       transition={{
-                        duration: 2,
+                        duration: 1.5,
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
                       className="text-2xl md:text-3xl font-bold flex items-center gap-3 text-black"
                     >
-                      Relax. You’re in the right place.{" "}
+                      Relax. You&apos;re in the right place.{" "}
                       <motion.span
                         animate={{ rotate: [0, 20, -20, 0] }}
-                        transition={{ duration: 1, repeat: Infinity }}
+                        transition={{ duration: 0.8, repeat: Infinity }}
                       >
                         😌
                       </motion.span>
@@ -289,46 +289,46 @@ const IntroSection = () => {
             </div>
             <p className="text-xl md:text-2xl text-black font-bold text-center mt-6">
               Aapke business ko banati hai{" "}
-              <motion.span
-                animate={{
-                  color: ["#000000", "#ff6b6b", "#4ecdc4", "#fdd820"],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                }}
-                className="inline-block"
-              >
-                scroll-stopping
-              </motion.span>
-              ,{" "}
-              <motion.span
-                animate={{
-                  color: ["#fdd820", "#ff6b6b", "#4ecdc4", "#fdd820"],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: 0.5,
-                }}
-                className="inline-block"
-              >
-                eye-catching
-              </motion.span>{" "}
-              aur{" "}
-              <motion.span
-                animate={{
-                  color: ["#fdd820", "#ff6b6b", "#4ecdc4", "#fdd820"],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: 1,
-                }}
-                className="inline-block"
-              >
-                money-making
-              </motion.span>
+            <motion.span
+              animate={{
+                color: ["#000000", "#ff6b6b", "#4ecdc4", "#fdd820"],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+              }}
+              className="inline-block"
+            >
+              scroll-stopping
+            </motion.span>
+            ,{" "}
+            <motion.span
+              animate={{
+                color: ["#fdd820", "#ff6b6b", "#4ecdc4", "#fdd820"],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: 0.3,
+              }}
+              className="inline-block"
+            >
+              eye-catching
+            </motion.span>{" "}
+            aur{" "}
+            <motion.span
+              animate={{
+                color: ["#fdd820", "#ff6b6b", "#4ecdc4", "#fdd820"],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: 0.6,
+              }}
+              className="inline-block"
+            >
+              money-making
+            </motion.span>
             </p>
           </div>
         </motion.div>
