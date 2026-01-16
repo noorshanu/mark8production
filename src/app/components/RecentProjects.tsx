@@ -1,8 +1,8 @@
 'use client'
-import { motion } from 'framer-motion'
 import Marquee from 'react-fast-marquee'
 import { FiPlay, FiExternalLink, FiCode, FiImage } from 'react-icons/fi'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
+import { initScrollAnimations } from '@/utils/initScrollAnimations'
 
 type ReelProject = {
   id: number
@@ -19,6 +19,12 @@ const RecentProjects = () => {
     fallbackVideoProjects
   )
   const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // Initialize scroll animations
+    const cleanup = initScrollAnimations()
+    return cleanup
+  }, [])
 
   useEffect(() => {
     let isMounted = true
@@ -166,43 +172,47 @@ const RecentProjects = () => {
   // Duplicate for seamless loop
   const duplicatedWebProjects = [...webGraphicsProjects, ...webGraphicsProjects]
 
+  const headerRef = useRef<HTMLDivElement>(null)
+  const [headerVisible, setHeaderVisible] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeaderVisible(true)
+          observer.disconnect() // Disconnect after first intersection
+        }
+      },
+      { threshold: 0.1 }
+    )
+    if (headerRef.current) {
+      observer.observe(headerRef.current)
+    }
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section className="relative bg-black py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+        <div
+          ref={headerRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-16 ${headerVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
-            Glimpse of our <span className="relative">
+            Glimpse of our <span className="relative inline-block">
               <span className="text-yellow-500">Projects</span>
-              <motion.span
-                initial={{ width: 0 }}
-                whileInView={{ width: '100%' }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="absolute bottom-0 left-0 h-1 bg-yellow-500"
-              />
+              <span className={`absolute bottom-0 left-0 h-1 bg-yellow-500 transition-all duration-800 ${headerVisible ? 'w-full' : 'w-0'}`} style={{ transitionDelay: '0.3s' }} />
             </span>
           </h2>
-        </motion.div>
+        </div>
 
         {/* Video Projects Section */}
         <div className="mb-20">
-          <motion.h3
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-2xl font-bold text-white mb-8 flex items-center gap-3"
-          >
+          <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3 animate-on-scroll">
             <FiPlay className="text-yellow-500" />
           Reels Projects
-          </motion.h3>
+          </h3>
 
           <div className="relative">
             {/* Gradient Fade on Left */}
@@ -227,10 +237,9 @@ const RecentProjects = () => {
                 className="py-4"
               >
                 {duplicatedVideoProjects.map((project, index) => (
-                <motion.div
+                <div
                   key={`${project.id}-${index}`}
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  className="mx-4 group cursor-pointer"
+                  className="mx-4 group cursor-pointer hover-lift"
                 >
                   {/* Mobile Frame */}
                   <div className="relative bg-gray-900 rounded-[2.5rem] p-3 shadow-2xl w-[280px]">
@@ -248,12 +257,9 @@ const RecentProjects = () => {
                           muted
                           loop
                           playsInline
-                          preload="metadata"
+                          preload="none"
                           onError={(e) => {
                             console.error('Video load error:', project.videoSrc, e)
-                          }}
-                          onLoadedData={() => {
-                            console.log('Video loaded:', project.title)
                           }}
                         />
                       ) : (
@@ -281,16 +287,11 @@ const RecentProjects = () => {
                       </div>
 
                       {/* Hover Overlay */}
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        className="absolute inset-0 bg-yellow-500/20 backdrop-blur-sm flex items-center justify-center z-10"
-                      >
+                      <div className="absolute inset-0 bg-yellow-500/20 backdrop-blur-sm flex items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div className="text-white text-center px-4">
-                        
                           <a href="/contact" className="text-sm opacity-90 bg-black rounded-full px-4 py-2">Conatct Us</a>
                         </div>
-                      </motion.div>
+                      </div>
                     </div>
 
                     {/* Project Title Below */}
@@ -300,7 +301,7 @@ const RecentProjects = () => {
                       </h4>
                     </div> */}
                   </div>
-                </motion.div>
+                </div>
               ))}
               </Marquee>
             )}
@@ -309,16 +310,10 @@ const RecentProjects = () => {
 
         {/* Laptop Video Projects Section */}
         <div className="mb-20">
-          <motion.h3
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-2xl font-bold text-white mb-8 flex items-center gap-3"
-          >
+          <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3 animate-on-scroll">
             <FiPlay className="text-yellow-500" />
          Promotional Videos
-          </motion.h3>
+          </h3>
 
           <div className="relative">
             {/* Gradient Fade on Left */}
@@ -334,10 +329,9 @@ const RecentProjects = () => {
               className="py-4"
             >
               {duplicatedLaptopProjects.map((project, index) => (
-                <motion.div
+                <div
                   key={`laptop-${project.id}-${index}`}
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  className="mx-4 group cursor-pointer"
+                  className="mx-4 group cursor-pointer hover-lift"
                 >
                   {/* Laptop Frame */}
                   <div className="relative bg-gray-800 rounded-lg shadow-2xl w-[600px]">
@@ -385,16 +379,11 @@ const RecentProjects = () => {
                           </div> */}
 
                           {/* Hover Overlay */}
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            whileHover={{ opacity: 1 }}
-                            className="absolute inset-0 bg-yellow-500/30 backdrop-blur-sm flex items-center justify-center z-10"
-                          >
+                          <div className="absolute inset-0 bg-yellow-500/30 backdrop-blur-sm flex items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div className="text-white text-center px-4">
-                       
                               <a href="/contact" className="text-sm opacity-90 bg-black rounded-full px-4 py-2">conatct us</a>
                             </div>
-                          </motion.div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -412,7 +401,7 @@ const RecentProjects = () => {
                       </h4>
                     </div> */}
                   </div>
-                </motion.div>
+                </div>
               ))}
             </Marquee>
           </div>
@@ -420,16 +409,10 @@ const RecentProjects = () => {
 
         {/* Web & Graphics Projects Section */}
         <div>
-          <motion.h3
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-2xl font-bold text-white mb-8 flex items-center gap-3"
-          >
+          <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3 animate-on-scroll">
             <FiCode className="text-yellow-500" />
             Web & Graphics
-          </motion.h3>
+          </h3>
 
           <div className="relative">
             {/* Gradient Fade on Left */}
@@ -446,10 +429,9 @@ const RecentProjects = () => {
               className="py-4"
             >
               {duplicatedWebProjects.map((project, index) => (
-                <motion.div
+                <div
                   key={`web-${project.id}-${index}`}
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  className="mx-4 group cursor-pointer"
+                  className="mx-4 group cursor-pointer hover-lift"
                 >
                   <div className="bg-gray-900 rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-800 hover:border-yellow-500 transition-all duration-300 h-full flex flex-col w-[350px]">
                     {/* Image/Thumbnail Area */}
@@ -488,18 +470,11 @@ const RecentProjects = () => {
                       </div>
 
                       {/* Hover Overlay */}
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center"
-                      >
-                        <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center"
-                        >
+                      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                           <FiExternalLink className="w-6 h-6 text-black" />
-                        </motion.div>
-                      </motion.div>
+                        </div>
+                      </div>
                     </div>
 
                     {/* Content */}
@@ -512,36 +487,17 @@ const RecentProjects = () => {
                       </p>
                       
                       {/* Bottom Accent */}
-                      <motion.div
-                        initial={{ scaleX: 0 }}
-                        whileHover={{ scaleX: 1 }}
-                        className={`h-1 bg-gradient-to-r ${project.gradient} mt-4 origin-left`}
-                      />
+                      <div className={`h-1 bg-gradient-to-r ${project.gradient} mt-4 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300`} />
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </Marquee>
           </div>
         </div>
       </div>
 
-      {/* Background Decorative Elements - Reduced for performance */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-        <motion.div
-          animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          className="absolute top-20 left-10 w-96 h-96 bg-yellow-500/5 rounded-full blur-3xl"
-          style={{ willChange: 'transform' }}
-        />
-      </div>
+      {/* Background Decorative Elements - Removed for performance */}
 
     </section>
   )
