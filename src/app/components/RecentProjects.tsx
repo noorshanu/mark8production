@@ -1,14 +1,9 @@
 'use client'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Marquee from 'react-fast-marquee'
-import { FiPlay, FiExternalLink, FiCode, FiImage, FiX } from 'react-icons/fi'
-import { useState } from 'react'
-import Image from 'next/image'
+import { FiPlay, FiExternalLink, FiCode, FiImage } from 'react-icons/fi'
 
 const RecentProjects = () => {
-  const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
-  const [selectedVideoType, setSelectedVideoType] = useState<'youtube' | 'local' | null>(null)
-  
   const videoProjects = [
     {
       id: 1,
@@ -214,32 +209,16 @@ const RecentProjects = () => {
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-10" />
                     
                     {/* Screen */}
-                    <div 
-                      className="relative bg-black rounded-[2rem] overflow-hidden aspect-[9/16] cursor-pointer"
-                      onClick={() => {
-                        if (project.videoSrc) {
-                          setSelectedVideo(project.videoSrc)
-                          setSelectedVideoType('local')
-                        }
-                      }}
-                    >
+                    <div className="relative bg-black rounded-[2rem] overflow-hidden aspect-[9/16]">
                       {/* Video Preview/Thumbnail */}
                       {project.videoSrc ? (
                         <video
                           src={project.videoSrc}
                           className="absolute inset-0 w-full h-full object-cover"
+                          autoPlay
                           muted
                           loop
                           playsInline
-                          onMouseEnter={(e) => {
-                            const video = e.currentTarget
-                            video.play()
-                          }}
-                          onMouseLeave={(e) => {
-                            const video = e.currentTarget
-                            video.pause()
-                            video.currentTime = 0
-                          }}
                         />
                       ) : (
                         <div className={`absolute inset-0 ${project.thumbnail}`}>
@@ -258,16 +237,6 @@ const RecentProjects = () => {
                       {/* Gradient Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                       
-                      {/* Play Button */}
-                      <div className="absolute inset-0 flex items-center justify-center z-10">
-                        <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20"
-                        >
-                          <FiPlay className="w-4 h-4 text-white ml-0.5" />
-                        </motion.div>
-                      </div>
-
                       {/* Category Badge */}
                       <div className="absolute top-4 left-4 z-10">
                         <span className="px-3 py-1 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold rounded-full">
@@ -281,14 +250,10 @@ const RecentProjects = () => {
                         whileHover={{ opacity: 1 }}
                         className="absolute inset-0 bg-yellow-500/20 backdrop-blur-sm flex items-center justify-center z-10"
                       >
-                        <motion.div
-                          initial={{ scale: 0.8 }}
-                          whileHover={{ scale: 1 }}
-                          className="text-white text-center px-4"
-                        >
-                          <div className="text-lg font-bold mb-1">{project.title}</div>
-                          <div className="text-sm opacity-90">Tap to watch</div>
-                        </motion.div>
+                        <div className="text-white text-center px-4">
+                        
+                          <a href="/contact" className="text-sm opacity-90 bg-black rounded-full px-4 py-2">Conatct Us</a>
+                        </div>
                       </motion.div>
                     </div>
 
@@ -347,25 +312,15 @@ const RecentProjects = () => {
                         <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-16 h-1.5 bg-black rounded-full z-10" />
                         
                         {/* Screen */}
-                        <div 
-                          className="relative bg-black rounded overflow-hidden aspect-video cursor-pointer"
-                          onClick={() => {
-                            if (project.videoId) {
-                              setSelectedVideo(project.videoId)
-                              setSelectedVideoType('youtube')
-                            }
-                          }}
-                        >
-                          {/* YouTube Thumbnail */}
+                        <div className="relative bg-black rounded overflow-hidden aspect-video">
+                          {/* YouTube Video (Autoplay) */}
                           {project.videoId ? (
-                            <Image
-                              src={`https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg`}
-                              alt={project.title}
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 768px) 100vw, 33vw"
-                              loading="lazy"
-                              onError={() => {}}
+                            <iframe
+                              src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&mute=1&loop=1&playlist=${project.videoId}&controls=0&rel=0&modestbranding=1&playsinline=1`}
+                              title={project.title}
+                              allow="autoplay; encrypted-media; picture-in-picture"
+                              allowFullScreen
+                              className="absolute inset-0 w-full h-full"
                             />
                           ) : (
                             <div className={`absolute inset-0 ${project.thumbnail}`}>
@@ -384,16 +339,6 @@ const RecentProjects = () => {
                           {/* Gradient Overlay for better visibility */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                           
-                          {/* Play Button */}
-                          <div className="absolute inset-0 flex items-center justify-center z-10">
-                            <motion.div
-                              whileHover={{ scale: 1.2 }}
-                              className="w-10 h-10 bg-transparent backdrop-blur-md rounded-full flex items-center justify-center border-2 border-white/30 shadow-2xl"
-                            >
-                              <FiPlay className="w-5 h-5 text-white ml-1" />
-                            </motion.div>
-                          </div>
-
                           {/* Category Badge */}
                           {/* <div className="absolute top-4 left-4 z-10">
                             <span className="px-3 py-1 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold rounded-full">
@@ -407,14 +352,10 @@ const RecentProjects = () => {
                             whileHover={{ opacity: 1 }}
                             className="absolute inset-0 bg-yellow-500/30 backdrop-blur-sm flex items-center justify-center z-10"
                           >
-                            <motion.div
-                              initial={{ scale: 0.8 }}
-                              whileHover={{ scale: 1 }}
-                              className="text-white text-center px-4"
-                            >
-                              <div className="text-lg font-bold mb-1">{project.title}</div>
-                              <div className="text-sm opacity-90">Tap to watch</div>
-                            </motion.div>
+                            <div className="text-white text-center px-4">
+                       
+                              <a href="/contact" className="text-sm opacity-90 bg-black rounded-full px-4 py-2">conatct us</a>
+                            </div>
                           </motion.div>
                         </div>
                       </div>
@@ -564,65 +505,6 @@ const RecentProjects = () => {
         />
       </div>
 
-      {/* Video Modal */}
-      <AnimatePresence>
-        {selectedVideo && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
-            onClick={() => setSelectedVideo(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <motion.button
-                onClick={() => {
-                  setSelectedVideo(null)
-                  setSelectedVideoType(null)
-                }}
-                whileHover={{ scale: 1.1, rotate: 90 }}
-                whileTap={{ scale: 0.9 }}
-                className="absolute top-4 right-4 z-20 w-12 h-12 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-red-600 transition-colors shadow-lg"
-                aria-label="Close video"
-              >
-                <FiX className="w-6 h-6" />
-              </motion.button>
-
-              {/* Video Player - YouTube or Local */}
-              {selectedVideoType === 'youtube' ? (
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1`}
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              ) : (
-                <video
-                  src={selectedVideo || ''}
-                  autoPlay
-                  controls
-                  loop
-                  playsInline
-                  className="w-full h-full"
-                >
-                  Your browser does not support the video tag.
-                </video>
-              )}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   )
 }
