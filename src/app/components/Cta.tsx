@@ -41,7 +41,7 @@ const Cta = () => {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="inline-block"
                   >
-                    Get Started
+              Get Started
                   </motion.span>
                 ) : (
                   <motion.span

@@ -2,52 +2,72 @@
 import { motion } from 'framer-motion'
 import Marquee from 'react-fast-marquee'
 import { FiPlay, FiExternalLink, FiCode, FiImage } from 'react-icons/fi'
+import { useEffect, useState } from 'react'
+
+type ReelProject = {
+  id: number
+  title: string
+  category: string
+  thumbnail: string
+  videoSrc: string
+}
 
 const RecentProjects = () => {
-  const videoProjects = [
-    {
-      id: 1,
-      title: 'Reel 1',
-      category: 'Reels',
-      thumbnail: 'bg-gradient-to-br from-orange-600 to-red-600',
-      videoSrc: '/reels/reel1.mp4',
-    },
-    {
-      id: 2,
-      title: 'Reel 2',
-      category: 'Reels',
-      thumbnail: 'bg-gradient-to-br from-purple-600 to-pink-600',
-      videoSrc: '/reels/reel2.mov',
-    },
-    {
-      id: 3,
-      title: 'Reel 3',
-      category: 'Reels',
-      thumbnail: 'bg-gradient-to-br from-blue-600 to-cyan-600',
-      videoSrc: '/reels/reel3.mp4',
-    },
-    {
-      id: 4,
-      title: 'Reel 4',
-      category: 'Reels',
-      thumbnail: 'bg-gradient-to-br from-green-600 to-emerald-600',
-      videoSrc: '/reels/reel4.mov',
-    },
-    {
-      id: 5,
-      title: 'Reel 5',
-      category: 'Reels',
-      thumbnail: 'bg-gradient-to-br from-indigo-600 to-purple-600',
-      videoSrc: '/reels/reel5.mov',
-    },
-    {
-      id: 6,
-      title: 'Reel 6',
-      category: 'Reels',
-      thumbnail: 'bg-gradient-to-br from-pink-600 to-rose-600',
-      videoSrc: '/reels/reel6.mp4',
-    },
-  ]
+  const fallbackVideoProjects: ReelProject[] = []
+
+  const [videoProjects, setVideoProjects] = useState<ReelProject[]>(
+    fallbackVideoProjects
+  )
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    let isMounted = true
+
+    const loadReels = async () => {
+      setIsLoading(true)
+      try {
+        console.log('Fetching reels from /api/reels...')
+        const response = await fetch('/api/reels', { cache: 'no-store' })
+        
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}))
+          console.error('Failed to fetch reels:', response.status, errorData)
+          if (isMounted) {
+            setIsLoading(false)
+          }
+          return
+        }
+        
+        const data = (await response.json()) as ReelProject[]
+        console.log('REELS DATA RECEIVED 👉', {
+          count: data.length,
+          data: data.map((r) => ({ id: r.id, title: r.title, videoSrc: r.videoSrc?.substring(0, 80) + '...' })),
+        })
+        
+        if (isMounted) {
+          if (Array.isArray(data) && data.length > 0) {
+            setVideoProjects(data)
+            console.log('✅ Reels loaded successfully:', data.length)
+          } else {
+            console.warn('⚠️ No reels found or empty array received')
+            setVideoProjects([])
+          }
+          setIsLoading(false)
+        }
+      } catch (error) {
+        console.error('❌ Error loading reels:', error)
+        if (isMounted) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    loadReels()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   // Duplicate for seamless loop
   const duplicatedVideoProjects = [...videoProjects, ...videoProjects]
@@ -191,13 +211,22 @@ const RecentProjects = () => {
             {/* Gradient Fade on Right */}
             <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
 
-            <Marquee
-              speed={40}
-              gradient={false}
-              pauseOnHover={true}
-              className="py-4"
-            >
-              {duplicatedVideoProjects.map((project, index) => (
+            {isLoading ? (
+              <div className="py-4 text-center text-gray-400">
+                Loading reels...
+              </div>
+            ) : videoProjects.length === 0 ? (
+              <div className="py-4 text-center text-gray-400">
+                No reels found. Please check your Cloudinary configuration.
+              </div>
+            ) : (
+              <Marquee
+                speed={40}
+                gradient={false}
+                pauseOnHover={true}
+                className="py-4"
+              >
+                {duplicatedVideoProjects.map((project, index) => (
                 <motion.div
                   key={`${project.id}-${index}`}
                   whileHover={{ y: -10, scale: 1.02 }}
@@ -219,6 +248,13 @@ const RecentProjects = () => {
                           muted
                           loop
                           playsInline
+                          preload="metadata"
+                          onError={(e) => {
+                            console.error('Video load error:', project.videoSrc, e)
+                          }}
+                          onLoadedData={() => {
+                            console.log('Video loaded:', project.title)
+                          }}
                         />
                       ) : (
                         <div className={`absolute inset-0 ${project.thumbnail}`}>
@@ -266,7 +302,8 @@ const RecentProjects = () => {
                   </div>
                 </motion.div>
               ))}
-            </Marquee>
+              </Marquee>
+            )}
           </div>
         </div>
 
@@ -316,11 +353,12 @@ const RecentProjects = () => {
                           {/* YouTube Video (Autoplay) */}
                           {project.videoId ? (
                             <iframe
-                              src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&mute=1&loop=1&playlist=${project.videoId}&controls=0&rel=0&modestbranding=1&playsinline=1`}
+                              src={`https://www.youtube-nocookie.com/embed/${project.videoId}?autoplay=1&mute=1&loop=1&playlist=${project.videoId}&controls=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&enablejsapi=0`}
                               title={project.title}
                               allow="autoplay; encrypted-media; picture-in-picture"
                               allowFullScreen
                               className="absolute inset-0 w-full h-full"
+                              loading="lazy"
                             />
                           ) : (
                             <div className={`absolute inset-0 ${project.thumbnail}`}>
