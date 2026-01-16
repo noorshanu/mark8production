@@ -209,7 +209,7 @@ const RecentProjects = () => {
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-10" />
                     
                     {/* Screen */}
-                    <div className="relative bg-black rounded-[2rem] overflow-hidden aspect-[9/16]">
+                    <div className="relative bg-black rounded-4xl overflow-hidden aspect-9/16">
                       {/* Video Preview/Thumbnail */}
                       {project.videoSrc ? (
                         <video

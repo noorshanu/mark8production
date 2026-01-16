@@ -17,7 +17,7 @@ const Loader = () => {
       // Faster, smoother loading - check if page is already loaded
       if (typeof window !== 'undefined' && document.readyState === 'complete') {
         setProgress(100)
-        timeout = setTimeout(() => setLoading(false), 300)
+        timeout = setTimeout(() => setLoading(false), 600)
         return
       }
 
