@@ -23,7 +23,7 @@ const Loader = () => {
 
       // Simulate loading progress - smoother with requestAnimationFrame
       let startTime: number | null = null
-      const duration = 2000 // 2 seconds max
+      const duration = 4000 // 2 seconds max
       const targetProgress = 100
 
       const animate = (currentTime: number) => {
@@ -36,7 +36,7 @@ const Loader = () => {
         if (progressValue < targetProgress) {
           animationFrameId = requestAnimationFrame(animate)
         } else {
-          timeout = setTimeout(() => setLoading(false), 200)
+          timeout = setTimeout(() => setLoading(false), 600)
         }
       }
 
