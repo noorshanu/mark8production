@@ -33,6 +33,13 @@ const ClientFeedback = () => {
         src: "https://images.unsplash.com/photo-1524267213992-b76e8577d046?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
       rating: 5,
     },
+    {
+      quote: "I discovered his work on Instagram through a simple exhibition booth reel, and his storytelling instantly stood out. I hired him for one shoot, and he’s been my only choice since. His mastery of space, lighting, and brand narrative is exceptional. Now launching his own company, he’s set to raise industry standards. Any brand will be in great hands confidently.",
+        name: "Tamar Mendelson",
+      designation: "Happy Client",
+        src: "/client1.jpeg",
+      rating: 5,
+    },
   ]
 
   const handleNext = () => {
@@ -174,12 +181,12 @@ const ClientFeedback = () => {
                   <h3 className="text-2xl font-bold text-black mb-2">
                     {testimonials[activeIndex].name}
                   </h3>
-                  <p className="text-sm text-gray-500 mb-6">
+                  <p className="text-sm text-gray-500 mb-2">
                     {testimonials[activeIndex].designation}
                   </p>
 
                   {/* Star Rating */}
-                  <div className="flex gap-1 mb-6">
+                  <div className="flex gap-1 mb-2">
                     {[...Array(5)].map((_, i) => (
                       <motion.div
                         key={i}

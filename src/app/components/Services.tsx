@@ -157,7 +157,7 @@ const Services = () => {
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                        className="bg-yellow-500 hover:bg-black hover:text-white text-black font-semibold py-2 px-6 rounded-lg transition-colors"
                       >
                         View Details
                       </motion.button>

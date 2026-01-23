@@ -5,7 +5,7 @@ const IntroSection = () => {
 
   return (
   <>
-    <section className="relative bg-[#fdd820] pt-12 pb-24 overflow-hidden">
+    <section className="relative bg-gray-100 pt-12 pb-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Heading */}
         <motion.div
@@ -42,14 +42,16 @@ const IntroSection = () => {
 
   
       </div>
-    </section>
-    <div className="sm:-mt-24 max-w-7xl mx-auto  sm:px-8 px-4  mt-0">
+
+      <div className=" max-w-7xl mx-auto  sm:px-8 px-4  mt-0">
         <Problemslist />
     </div>
-    <div className="sm:-mt-24  mt-0">
+    <div className="">
       <TeamMesage
       />
     </div>
+    </section>
+ 
   </>
   );
 };

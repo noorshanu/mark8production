@@ -76,7 +76,7 @@ const Loader = () => {
   if (!loading) return null
 
   return (
-    <div className="loader-container fixed inset-0 z-[9999] bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 flex items-center justify-center">
+    <div className="loader-container fixed inset-0 z-[9999] bg-white flex items-center justify-center">
       <style jsx>{`
         .loader-container {
           animation: fadeOut 0.3s ease-out forwards;
