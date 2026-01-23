@@ -98,7 +98,7 @@ const PromotionalVideosSection = () => {
                       {/* Hover Overlay */}
                       <div className="absolute inset-0 bg-yellow-500/30 backdrop-blur-sm flex items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div className="text-white text-center px-4">
-                          <a href="/contact" className="text-sm opacity-90 bg-black rounded-full px-4 py-2">Contact Us</a>
+                          <a href="/contact-us" className="text-sm opacity-90 bg-black rounded-full px-4 py-2">Contact Us</a>
                         </div>
                       </div>
                     </div>
