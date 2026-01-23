@@ -71,11 +71,11 @@ const Hero = () => {
           {/* Left Side - Content */}
           <div className="">
             {/* Main Tagline */}
-            <h2 className="text-sm font-medium text-black bg-white-500 shadow-2xl px-4 py-2 border-2 border-yellow-500  font-tiktok-sans rounded-full w-fit">
+            <h2 className="text-sm font-medium text-black bg-white-500 shadow-2xl px-4 py-2 border-2 border-yellow-500  font-tiktok-sans rounded-full w-fit marker mb-2">
             Aap Business Sambhalo,
            
             </h2>
-            <h1 className="text-5xl sm:text-7xl font-bold leading-tight font-bangers">
+            <h1 className="text-5xl sm:text-[76px] font-bold mb-2 ">
               <motion.span
                 className="text-yellow-500 inline-block"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -103,7 +103,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.05 }}
                 style={{ willChange: 'transform, opacity' }}
               >
-               hum karwa 
+               Hum karwa 
               </motion.span>
               
               <br />
@@ -120,7 +120,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.05 }}
                 style={{ willChange: 'transform, opacity' }}
               >
-               denge.
+               Denge.
               </motion.span>
             </h1>
 

@@ -15,7 +15,7 @@ const IntroSection = () => {
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="text-center mb-4"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-black mb-2 leading-tight font-bangers">
+          <h2 className="text-4xl md:text-6xl font-bold text-black mb-2 ">
             Sach batao...{" "}
             <motion.span
               animate={{ rotate: [0, 10, -10, 0] }}
